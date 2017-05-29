@@ -84,7 +84,7 @@ for i in 0...cities.count - 1 {
     } else if inputToProcess + cities[i].diff > 2359 {
         cities[i].time = abs(2400 - (inputToProcess + cities[i].diff))
     } else {
-        cities[i].time = abs(inputToProcess + cities[i].diff)
+        cities[i].time = inputToProcess + cities[i].diff
     }
 }
 

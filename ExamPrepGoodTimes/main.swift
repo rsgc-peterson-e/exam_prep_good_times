@@ -79,7 +79,13 @@ while inputToProcess == Int.max {
 // add newline to space out input from output
 
 for i in 0...cities.count - 1 {
-    cities[i].time = abs(inputToProcess + cities[i].diff)
+    if inputToProcess + cities[i].diff < 0 {
+        cities[i].time = 2400 + (inputToProcess + cities[i].diff)
+    } else if inputToProcess + cities[i].diff > 2359 {
+        cities[i].time = abs(2400 - (inputToProcess + cities[i].diff))
+    } else {
+        cities[i].time = abs(inputToProcess + cities[i].diff)
+    }
 }
 
 

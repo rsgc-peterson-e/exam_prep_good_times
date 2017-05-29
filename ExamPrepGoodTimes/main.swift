@@ -78,13 +78,84 @@ while inputToProcess == Int.max {
 // Add 'process' code below....
 // add newline to space out input from output
 
+//for i in 0...cities.count - 1 {
+//    if inputToProcess + cities[i].diff < 0 {
+//        if ((2400 + (inputToProcess + cities[i].diff)) / 10) % 10 < 6 {
+//            cities[i].time = 2400 + (inputToProcess + cities[i].diff)
+//        } else {
+//            cities[i].time = ((2400 + (inputToProcess + cities[i].diff)) % 60) + 100
+//            var i = 0
+//            while (cities[i].time! / 10 % 10 > 6) {
+//                i += 1
+//                cities[i].time = ((2400 + (inputToProcess + cities[i].diff)) % (60 * i)) + (100 * i)
+//            }
+//        }
+//    } else if inputToProcess + cities[i].diff > 2359 {
+//        if (abs(2400 - (inputToProcess + cities[i].diff)) / 10) % 10 < 6 {
+//            cities[i].time = abs(2400 - (inputToProcess + cities[i].diff))
+//        } else {
+//            cities[i].time = (abs(2400 - (inputToProcess + cities[i].diff)) % 60) + 100
+//            var j = 0
+//            while (cities[i].time! / 10 % 10 > 6) {
+//                j += 1
+//                cities[i].time = (abs(2400 - (inputToProcess + cities[i].diff)) % (60 * j)) + (100 * j)
+//            }
+//        }
+//    } else {
+//        cities[i].time = inputToProcess + cities[i].diff
+//    }
+//}
+
+//for i in 0...cities.count - 1 {
+//    var timeVal = inputToProcess + cities[i].diff
+//    if (timeVal > 2359) {
+//        timeVal = abs(2400 - timeVal)
+//        while ((timeVal / 10) % 10 > 6) {
+//            timeVal = (timeVal % 60) + 100
+//        }
+//        cities[i].time = timeVal
+//    } else if (timeVal  < 0) {
+//        timeVal = 2400 + timeVal
+//        if ((timeVal / 10) % 10 > 6) {
+//            while ((timeVal / 10) % 10 > 6) {
+//                timeVal = (timeVal % 60) + 100
+//            }
+//            cities[i].time = timeVal
+//        }
+//    } else if timeVal < 2400 && timeVal >= 0 {
+//        cities[i].time = timeVal
+//    }
+//}
+
+print("") // add newline for output readability
+
 for i in 0...cities.count - 1 {
-    if inputToProcess + cities[i].diff < 0 {
-        cities[i].time = 2400 + (inputToProcess + cities[i].diff)
-    } else if inputToProcess + cities[i].diff > 2359 {
-        cities[i].time = abs(2400 - (inputToProcess + cities[i].diff))
+    var timeVal = inputToProcess + cities[i].diff
+    if (timeVal > 2359) {
+        timeVal = abs(2400 - timeVal)
+        while ((timeVal / 10) % 10 > 6) {
+            timeVal = (timeVal % 60) + 100
+        }
+        cities[i].time = timeVal
+    } else if (timeVal < 0) {
+        timeVal = 2400 + timeVal
+        cities[i].time = timeVal
+        if ((abs(timeVal) / 10) % 10 > 6) {
+            while ((timeVal / 10) % 10 > 6) {
+                timeVal = (timeVal % 60) + 100
+            }
+            cities[i].time = timeVal
+        }
     } else {
-        cities[i].time = inputToProcess + cities[i].diff
+        cities[i].time = timeVal
+        if ((abs(timeVal) / 10) % 10 > 6) {
+            var j = 1
+            while ((timeVal / 10) % 10 > 6) {
+                j += 1
+                timeVal = (timeVal % 100 - 60) + 100 * j
+            }
+            cities[i].time = timeVal
+        }
     }
 }
 
